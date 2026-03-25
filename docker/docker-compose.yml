@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  vlm:
+    build:
+      context: ../
+      dockerfile: backend/vlm/Dockerfile
+    environment:
+      - MODEL_ID=HuggingFaceM4/idefics2-8b
+      - ADAPTER_PATH=/app/adapters
+      - DEVICE=cuda:0
+      - PORT=8001
+      - MAX_CONCURRENT_REQUESTS=4
+    volumes:
+      - ./models/idefics2-adapter:/app/adapters  # Ajusta la ruta
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    networks:
+      - fmia_net
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  bot:
+    build:
+      context: ../
+      dockerfile: frontend/Dockerfile
+    environment:
+      - TELEGRAM_TOKEN=${TELEGRAM_TOKEN}
+      - VLM_SERVER_URL=http://vlm:8001
+      - VLM_TIMEOUT=120
+      - MAX_IMAGE_SIZE_MB=10
+      - LOG_LEVEL=INFO
+    depends_on:
+      vlm:
+        condition: service_healthy
+    networks:
+      - fmia_net
+
+networks:
+  fmia_net:
+    driver: bridge

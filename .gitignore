@@ -1,0 +1,27 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Entornos virtuales
+venv/
+.venv/
+env/
+
+# Datos sensibles
+.env
+
+# CACHÉ Y MODELOS (CRÍTICO: No subir gigas de modelos)
+cache/
+models/
+huggingface/
+*.safetensors
+*.bin
+*.gguf
+*.json (específicamente los de config de modelos si son pesados)
+
+# Base de datos local
+database/data/
+
+# Archivos de sistema
+.DS_Store
