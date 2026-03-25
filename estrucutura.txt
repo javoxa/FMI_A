@@ -1,63 +1,85 @@
-schrodinger-assistant/
-├── .github/
-│   └── workflows/              # (Opcional) CI/CD para GitHub Actions
-│       └── deploy.yml
-├── backend/
-│   ├── llm/
-│   │   ├── src/
-│   │   │   ├── inference_server.py
-│   │   │   └── __init__.py
-│   │   ├── requirements.txt
-│   │   ├── Dockerfile
-│   │   └── README.md
-│   ├── vlm/
-│   │   ├── src/
-│   │   │   ├── vlm_server.py
-│   │   │   └── __init__.py
-│   │   ├── requirements.txt
-│   │   ├── Dockerfile
-│   │   └── README.md
-│   └── shared/
-│       ├── clients/
-│       │   ├── __init__.py
-│       │   ├── llm_client.py
-│       │   └── vlm_client.py
-│       ├── models/
-│       │   ├── __init__.py
-│       │   └── schemas.py      # Pydantic models compartidos
-│       └── requirements.txt
-├── frontend/
-│   └── bot/
-│       ├── src/
-│       │   ├── __init__.py
-│       │   ├── main.py
-│       │   ├── config.py
-│       │   ├── handlers/
-│       │   │   ├── __init__.py
-│       │   │   ├── image.py
-│       │   │   ├── text.py
-│       │   │   └── latex.py
-│       │   ├── retriever.py
-│       │   └── utils.py
-│       ├── requirements.txt
-│       ├── Dockerfile
-│       └── README.md
-├── database/
-│   ├── init/
-│   │   ├── 01_schema.sql
-│   │   ├── 02_indexes.sql
-│   │   └── 03_seeds.sql
-│   └── README.md
-├── docker/
-│   ├── docker-compose.yml
-│   ├── docker-compose.prod.yml    # Override para producción
-│   └── .env.example
-├── scripts/
-│   ├── download_models.sh
-│   ├── setup_environment.sh
-│   ├── healthcheck.sh
-│   └── runpod_setup.sh            # Script específico para RunPod
-├── .env.example
-├── .gitignore
-├── LICENSE
-└── README.md
+### ESTRUCTURA DEL PROYECTO: proyecto_FMIA
+
+.
+|-- backend
+|   |-- inference_vlm_server.py
+|   |-- llm
+|   |   |-- Dockerfile
+|   |   |-- README.md
+|   |   |-- requirements.txt
+|   |   `-- src
+|   |       |-- inference_server.py
+|   |       `-- __init__.py
+|   |-- orchestrator
+|   |   |-- __init__.py
+|   |   |-- orchestrator.py
+|   |   |-- physics
+|   |   |   `-- wave_builder.py
+|   |   `-- solvers
+|   |       |-- analytical.py
+|   |       |-- __init__.py
+|   |       |-- numerical.py
+|   |       `-- symbolic.py
+|   |-- shared
+|   |   |-- clients
+|   |   |   |-- __init__.py
+|   |   |   |-- llm_client.py
+|   |   |   `-- vlm_client.py
+|   |   |-- parsers
+|   |   |   |-- __init__.py
+|   |   |   |-- normalizer.py
+|   |   |   `-- vlm_parser.py
+|   |   |-- requirements.txt
+|   |   `-- utils
+|   |       |-- hashing.py
+|   |       |-- __init__.py
+|   |       `-- numbers.py
+|   `-- vlm
+|       |-- Dockerfile
+|       |-- README.md
+|       |-- requirements.txt
+|       `-- src
+|           |-- __init__.py
+|           `-- vlm_server.py
+|-- database
+|   |-- init
+|   |   |-- 01_schema.sql
+|   |   |-- 02_indexes.sql
+|   |   `-- 03_seeds.sql
+|   `-- README.md
+|-- docker
+|   |-- docker-compose.prod.yml
+|   |-- docker-compose.yml
+|   `-- .env.example
+|-- .env
+|-- .env.example
+|-- estrucutura.txt
+|-- frontend
+|   |-- bot
+|   |   |-- config.py
+|   |   |-- __init__.py
+|   |   |-- main.py
+|   |   `-- src
+|   |       |-- formatters.py
+|   |       |-- handlers
+|   |       |   |-- image.py
+|   |       |   |-- __init__.py
+|   |       |   |-- latex.py
+|   |       |   `-- text.py
+|   |       |-- retriever.py
+|   |       `-- utils.py
+|   |-- Dockerfile
+|   |-- __init__.py
+|   |-- README.md
+|   `-- requirements.txt
+|-- generar_archivos.sh
+|-- .gitignore
+|-- LICENSE
+|-- proyecto_FMIA_completo.txt
+|-- README.md
+|-- run.py
+`-- scripts
+    |-- download_models.sh
+    |-- healthcheck.sh
+    |-- runpod_setup.sh
+    `-- setup_environment.sh
